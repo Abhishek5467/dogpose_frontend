@@ -1,5 +1,3 @@
-Below is an example README in Markdown that explains the project’s end-to-end functionality, including how the frontend, backend, and ESP32 (Arduino IDE code) connect. You can copy, modify, and include this file in your GitHub repository.
-
 ---
 
 # Dog Pose Detection IoT System
