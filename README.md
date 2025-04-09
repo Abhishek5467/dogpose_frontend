@@ -15,6 +15,115 @@ This project demonstrates an end-to-end IoT system that collects sensor data and
 
 - **ESP32:** An Arduino (ESP32) based device that reads sensor values (e.g., temperature, humidity, motion) and sends them as JSON payloads via HTTP/HTTPS POST requests to the Flask server.
 
+- arduino IDE Code
+
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <DHT.h>
+
+// WiFi credentials
+const char* ssid = "Infinix HOT 50 5G";
+const char* password = "jaishriram";
+
+// Server endpoint
+const char* serverUrl = "https://dogpose-detector.onrender.com/sensor_data";
+
+
+#define DHTPIN 21
+#define DHTTYPE DHT11
+#define PIRPIN 22
+
+DHT dht(DHTPIN, DHTTYPE);
+
+// Variables for tracking state
+unsigned long lastSendTime = 0;
+const unsigned long SEND_INTERVAL = 5000;  // Send data every 5 seconds
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) delay(100);  // Wait for serial to initialize
+  
+  // Initialize sensors
+  pinMode(PIRPIN, INPUT);
+  dht.begin();
+  
+  // Connect to WiFi with status messages
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi");
+  
+  int attempts = 0;
+  while (WiFi.status() != WL_CONNECTED && attempts < 20) {
+    delay(500);
+    Serial.print(".");
+    attempts++;
+  }
+  
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("\nConnected to WiFi");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+  } else {
+    Serial.println("\nFailed to connect to WiFi. Check credentials.");
+  }
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+  
+  // Check WiFi connection and reconnect if needed
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi disconnected. Reconnecting...");
+    WiFi.reconnect();
+    delay(2000);  // Give time to reconnect
+  }
+  
+  // Only send data at the specified interval
+  if (currentMillis - lastSendTime >= SEND_INTERVAL && WiFi.status() == WL_CONNECTED) {
+    lastSendTime = currentMillis;
+    
+    // Read sensor data
+    float temperature = dht.readTemperature();
+    float humidity = dht.readHumidity();
+    bool motionDetected = digitalRead(PIRPIN);
+    
+    // Check if any readings failed
+    if (isnan(temperature) || isnan(humidity)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+    }
+    
+    // Format data as JSON
+    String payload = "{\"temperature\": " + String(temperature, 1) +
+                     ", \"humidity\": " + String(humidity, 1) +
+                     ", \"motion\": " + String(motionDetected ? "true" : "false") + "}";
+    
+    Serial.print("Sending data: ");
+    Serial.println(payload);
+    
+    // Send HTTP request
+    HTTPClient http;
+    http.begin(serverUrl);
+    http.addHeader("Content-Type", "application/json");
+    
+    int httpResponseCode = http.POST(payload);
+    
+    if (httpResponseCode > 0) {
+      String response = http.getString();
+      Serial.println("Server response code: " + String(httpResponseCode));
+      Serial.println("Response: " + response);
+    } else {
+      Serial.print("Error sending data. HTTP error code: ");
+      Serial.println(httpResponseCode);
+    }
+    
+    http.end();
+  }
+}
+
+
+---
+select NodeMCU-32S and your esp32 board version should be 2.0.x 
+
 ---
 
 ## Table of Contents
