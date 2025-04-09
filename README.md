@@ -1,5 +1,3 @@
-Below is an example README file in Markdown format that explains the entire project, including how the frontend and backend connect. You can copy, modify, and include it in your GitHub repository.
-
 ---
 
 # Dog Pose Detection IoT System
