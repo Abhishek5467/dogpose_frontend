@@ -194,8 +194,3 @@ This project demonstrates an end-to-end IoT system that collects sensor data and
 Include your project’s license information here (e.g., MIT License).
 
 ---
-
-This README provides a comprehensive overview of the project, explains how the frontend and backend connect and communicate, and details the protocols and processing involved. Adjust the content as needed for your specific project setup and any additional features you implement.
-
----
-Answer from Perplexity: pplx.ai/share
