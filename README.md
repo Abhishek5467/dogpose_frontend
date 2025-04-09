@@ -1,5 +1,3 @@
-Below is an example README in Markdown that explains the project’s end-to-end functionality, including how the frontend, backend, and ESP32 (Arduino IDE code) connect. You can copy, modify, and include this file in your GitHub repository.
-
 ---
 
 # Dog Pose Detection IoT System
@@ -224,11 +222,4 @@ In HTTP requests, the payload is the data in the body of the request. For multip
 CORS (Cross-Origin Resource Sharing) is a mechanism that allows web or mobile clients hosted on a different origin (domain, port, or scheme) to access resources on your Flask server. The Flask-CORS extension automatically adds headers like `Access-Control-Allow-Origin: *` so that modern browsers and clients can perform cross-origin HTTP requests without being blocked by the same-origin policy.
 
 ---
-
-This README covers the complete project flow, protocols, and setup instructions while including the Arduino (ESP32) code that connects your sensors with your backend. Adjust any details or thresholds according to your project needs before publishing it on GitHub.
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/51334625/4d5118e1-fb27-436b-bb6d-10a2aa726720/paste.txt
-
 ---
-Answer from Perplexity: pplx.ai/share
