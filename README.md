@@ -1,4 +1,3 @@
----
 
 # Dog Pose Detection IoT System
 
