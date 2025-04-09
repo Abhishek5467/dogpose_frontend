@@ -1,5 +1,3 @@
----
-
 # Dog Pose Detection IoT System
 
 This project demonstrates an end-to-end IoT system that collects sensor data and performs dog pose detection via image uploads. The system consists of three major components:
