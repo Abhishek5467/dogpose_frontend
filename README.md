@@ -222,4 +222,3 @@ In HTTP requests, the payload is the data in the body of the request. For multip
 CORS (Cross-Origin Resource Sharing) is a mechanism that allows web or mobile clients hosted on a different origin (domain, port, or scheme) to access resources on your Flask server. The Flask-CORS extension automatically adds headers like `Access-Control-Allow-Origin: *` so that modern browsers and clients can perform cross-origin HTTP requests without being blocked by the same-origin policy.
 
 ---
----
