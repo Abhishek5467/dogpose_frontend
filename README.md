@@ -15,6 +15,8 @@ This project demonstrates an end-to-end IoT system that collects sensor data and
 
 - **ESP32:** An Arduino (ESP32) based device that reads sensor values (e.g., temperature, humidity, motion) and sends them as JSON payloads via HTTP/HTTPS POST requests to the Flask server.
 
+---
+---
 - arduino IDE Code
 
 #include <WiFi.h>
@@ -122,8 +124,9 @@ void loop() {
 
 
 ---
+---
 select NodeMCU-32S and your esp32 board version should be 2.0.x 
-
+---
 ---
 
 ## Table of Contents
